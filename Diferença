@@ -1,0 +1,19 @@
+package br.com.test.model;
+
+import java.util.Scanner;
+
+public class test2 {
+    static void main() {
+        Scanner scanner = new Scanner(System.in);
+        int A = scanner.nextInt();
+        int B = scanner.nextInt();
+        int C = scanner.nextInt();
+        int D = scanner.nextInt();
+
+        int DIFERENÇA = ((A*B)-(C*D));
+
+        System.out.println("diferença = " + DIFERENÇA);
+
+        scanner.close();
+    }
+}
