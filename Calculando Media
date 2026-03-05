@@ -1,0 +1,31 @@
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        // Usamos Locale.US para garantir que o ponto seja usado como separador decimal
+        Locale.setDefault(Locale.US);
+        Scanner scanner = new Scanner(System.in);
+
+        // Entrada das notas
+        double A = scanner.nextDouble();
+        double B = scanner.nextDouble();
+        double C = scanner.nextDouble();
+
+        // Pesos definidos pelo enunciado
+        double pesoA = 2.0;
+        double pesoB = 3.0;
+        double pesoC = 5.0;
+
+        // Cálculo da Média Ponderada
+        double media = ((A * pesoA) + (B * pesoB) + (C * pesoC)) / (pesoA + pesoB + pesoC);
+
+        // Limitando entre 0 e 10 (Caso alguma nota de entrada seja inválida)
+        media = Math.max(0.0, Math.min(10.0, media));
+
+        // Saída formatada com 1 casa decimal (%.1f) e quebra de linha (%n)
+        System.out.printf("MEDIA = %.1f%n", media);
+
+        scanner.close();
+    }
+}
