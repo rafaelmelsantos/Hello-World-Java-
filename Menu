@@ -1,0 +1,154 @@
+package br.com.fecaf.controller;
+
+import br.com.fecaf.model.Livro;
+import br.com.fecaf.model.Pessoa;
+
+import java.util.Scanner;
+
+public class Menu {
+
+    // Scanner para coletar dados do terminal
+    Scanner scanner = new Scanner(System.in);
+
+    // Instanciar Controller Livro fora do while
+    LivroController livroController = new LivroController();
+    PessoaController pessoaController = new PessoaController();
+
+    public  void exibirMenu() {
+
+        boolean exit = false;
+
+        while(!exit) {
+            System.out.println("/*****☆*: .｡. o(≧▽≦)o .｡.:*☆*****/");
+            System.out.println("/*              Menu              *");
+            System.out.println("/*****☆*: .｡. o(≧▽≦)o .｡.:*☆*****/");
+            System.out.println(" 1 - Cadastrar Livro ");
+            System.out.println(" 2 - Cadastrar User ");
+            System.out.println(" 3 - Exibir Livros ");
+            System.out.println(" 4 - Exibir User ");
+            System.out.println(" 5 - Emprestar Livro ");
+            System.out.println(" 6 - Devolver Livro ");
+            System.out.println(" 7 - Deletar Livro ");
+            System.out.println(" 8 - Deletar User ");
+            System.out.println(" 9 - Sair ");
+            System.out.println("/***** ᓚᘏᗢ *****/");
+
+            int userOption = scanner.nextInt();
+            scanner.nextLine();
+
+            // Validar o numero digitado pelo user
+            // Switch case só para valores inteiros ou string, float não
+            // Loop - Por padrão avalia True:
+            // While(); - Quando eu não sei quando termina, infinito e valida, depois faz |
+            // For(inti=0;;>10i++); - Lista finita, pode usar para tabuada |
+            // For each (); - Manipular objetos, para cada |
+            // do{}While (); - Faz e depois valida
+
+            switch (userOption) {
+                case 1:
+                    Livro livro = new Livro();
+                    livro.cadastrarLivro();
+                    livroController.adicionarLivro(livro);
+                    break;
+                case 2:
+                    Pessoa pessoa = new Pessoa();
+                    pessoa.cadastrarPessoa();
+                    pessoaController.adicionarPessoa(pessoa);
+                    break;
+                case 3:
+                    livroController.listarLivros();
+                    break;
+                case 4:
+                    pessoaController.listarPessoa();
+                    break;
+                case 5:
+                    System.out.println("/***** emprestar livro *****/");
+                    System.out.println(" Informe o CPF: ");
+                    String cpfUser = scanner.nextLine();
+
+                    Pessoa pessoaEmprestimo = pessoaController.pesquisarPessoa(cpfUser);
+
+                    if (pessoaEmprestimo != null){
+
+                        livroController.listarLivros();
+                        System.out.println("Informe o Livro: ");
+                        String nomeLivroEmprestimo = scanner.nextLine();
+
+
+                        Livro livroEmprestimo = livroController.pesquisarLivro(nomeLivroEmprestimo);
+
+                        if (livroEmprestimo != null){
+                            //se chegou aqui o que eu tenho de informação? qual o proximo passo?
+                            //verificar se o user ja tem um livro e verificar se o livro isEmprestado
+                            if (pessoaEmprestimo.livro == null && livroEmprestimo.isEmprestado == false){
+                                livroEmprestimo.isEmprestado = true;
+                                pessoaEmprestimo.livro = livroEmprestimo;
+
+                                System.out.println("livro emprestado com sucesso!");
+
+                            }else{
+                                System.out.println("você não pode pegar o livro");
+                                System.out.println("ou vocêjá tem o livro");
+                                System.out.println("ou o livro ja ta emprestado");
+                            }
+
+
+                        }else{
+                            System.out.println("Livro não cadastrado!");
+                        }
+                    }else {
+                        System.out.println("Pessoa não Encontrada!");
+                    }
+
+                    break;
+                case 6:
+                    System.out.println("Feature in Development");
+                    break;
+                case 7:
+                    System.out.println("Qual o nome do livro você quer deletar?");
+                    Livro livroDelete = livroController.pesquisarLivro (scanner.nextLine());
+                    if (livroDelete != null) {
+                        System.out.println("Tem certeza? " + livroDelete.titulo + " (1 - Sim (❁´◡`❁) | 2 - Não (┬┬﹏┬┬))");
+                        int resposta = scanner.nextInt();
+                        switch (resposta) {
+                            case 1:
+                                livroController.deletarLivro(livroDelete);
+                                System.out.println("Livro deletado");
+                                break;
+                            case 2:
+                                System.out.println("Livro não deletado");
+                                break;
+                        }
+                    } else {
+                        System.out.println("Livro não encontrado");
+                    }
+                    break;
+                case 8:
+                    System.out.println("Qual o CPF da pessoa que você quer deletar?");
+                    Pessoa pessoaDelete = pessoaController.pesquisarPessoa(scanner.nextLine());
+                    if (pessoaDelete != null) {
+                        System.out.println("Tem certeza? " + pessoaDelete.nome + " (1 - Sim | 2 - Não");
+                        int resposta = scanner.nextInt();
+                        switch (resposta) {
+                            case 1:
+                                pessoaController.deletarPessoa(pessoaDelete);
+                                System.out.println("User deletado");
+                                break;
+                            case 2:
+                                System.out.println("User NÃO deletado");
+                        }
+                    } else {
+                        System.out.println("User não encontrado");
+                    }
+                    break;
+                case 9:
+                    System.out.println("Saindo ...");
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Digite uma opção valida!");
+
+            }
+        }
+    }
+}
