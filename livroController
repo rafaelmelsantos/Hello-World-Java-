@@ -1,0 +1,50 @@
+package br.com.fecaf.controller;
+
+import br.com.fecaf.model.Livro;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LivroController {
+    // Processamento de dados - O modelo é espelho do BD
+    // Criar uma lista para armazenar Livros
+    List<Livro> livroList = new ArrayList<>();
+
+    // Adicionando um livro na lista
+    public void adicionarLivro (Livro livro) {
+        System.out.println("Adicionando Livro na Lista");
+        livroList.add(livro);
+    }
+
+    // Listar livros
+    public void listarLivros () {
+        System.out.println("/***** Listar Livros ദ്ദി◝ ⩊ ◜.ᐟ ******/");
+
+        for (Livro livro : livroList) {
+            livro.exibirLivro();
+        }
+    }
+
+    // Pesquisar Livro
+    // Chave primária, tipo cpf
+    public Livro pesquisarLivro (String nome) {
+        System.out.println("/***** Pesquisar Livros ******/");
+
+        for (Livro livro : livroList) {
+            if (livro.titulo.equals(nome)) {
+                System.out.println("Livro Encontrado(∩^o^)⊃━☆");
+                livro.exibirLivro();
+
+                return livro;
+            }
+        }
+
+        return null;
+    }
+
+    // Deletar Livro
+    public void deletarLivro (Livro livro) {
+        livroList.remove(livro);
+    }
+}
+
