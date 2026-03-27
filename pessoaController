@@ -1,0 +1,47 @@
+package br.com.fecaf.controller;
+
+import br.com.fecaf.model.Pessoa;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PessoaController {
+
+    // Criar a lista para armazenar Pessoa
+    List<Pessoa> pessoaList = new ArrayList<>();
+
+    // Adicionar na lista
+    public void adicionarPessoa (Pessoa pessoa) {
+        System.out.println("Adicionando Pessoa na lista");
+        pessoaList.add(pessoa);
+    }
+
+    // Listar Pessoa
+    public void listarPessoa () {
+        System.out.println("Lista de Pessoas Cadastradas");
+        for (Pessoa pessoa : pessoaList) {
+            pessoa.exibirPessoa();
+        }
+
+    }
+
+    // Pesquisar uma Pessoa
+    // Ponteiro? Equals pra String?
+    public Pessoa pesquisarPessoa (String cpf) {
+        System.out.println("Pesquisar Pessoa");
+        for (Pessoa pessoa : pessoaList) {
+            if (pessoa.cpf.equals(cpf)) {
+                System.out.println("Pessoa encontrada!");
+                return pessoa;
+            }
+        }
+
+        return null;
+    }
+
+    // Deletar Pessoa
+    public void deletarPessoa (Pessoa pessoa) {
+        pessoaList.remove(pessoa);
+    }
+}
+
