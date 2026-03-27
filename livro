@@ -1,0 +1,36 @@
+package br.com.fecaf.model;
+
+import java.util.Scanner;
+
+public class Livro {
+    public String titulo;
+    public String autor;
+    public int qt_pag;
+    public String genero;
+
+    public boolean isEmprestado = false;
+
+    // coletar dados
+    Scanner scanner = new Scanner(System.in);
+
+    public boolean cadastrarLivro() {
+        System.out.println("Qual o nome? ");
+        titulo = scanner.nextLine();
+        System.out.println("Qual o autor? ");
+        autor = scanner.nextLine();
+        System.out.println("Qual o gênero? ");
+        genero = scanner.nextLine();
+        System.out.println("Qual a quantidade de páginas? ");
+        qt_pag = scanner.nextInt();
+
+        return true;
+
+    }
+
+    public void exibirLivro() {
+        System.out.println("Nome do livro: " + titulo);
+        System.out.println("Autor: " + autor);
+        System.out.println("Quantidade de páginas: " + qt_pag);
+        System.out.println("Gênero: " + genero);
+    }
+}
